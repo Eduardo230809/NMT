@@ -1,7 +1,7 @@
 from transformers import MarianTokenizer, MarianMTModel
 import os
 
-model_path = r'C:\Users\Eduardo\Documents\Transformer-cone\NMT\src\models\saved_model'
+model_path = r'C:\NMT\src\models\saved_model'
 
 if not os.path.isdir(model_path):
     raise ValueError(f"La ruta al modelo no existe: {model_path}")

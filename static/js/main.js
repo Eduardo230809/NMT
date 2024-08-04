@@ -3,28 +3,38 @@ $(document).ready(function() {
 
     $('#translate_text_btn').on('click', function() {
         mode = 'text';
-        $('#input_area').html('<textarea id="text" name="text" class="form-control" rows="6"></textarea>');
-        $('#output_area').html('<textarea id="translated_text" name="translated_text" class="form-control" rows="6" readonly></textarea>');
+        $('#input_area').html(
+            '<label for="input_area" class="form-label">Inglés</label>' +
+            '<textarea id="text" name="text" class="form-control" rows="6"></textarea>');
+        $('#output_area').html(
+            '<label for="output_area" class="form-label">Francés</label>' + 
+            '<textarea id="translated_text" name="translated_text" class="form-control" rows="6" readonly></textarea>');
         $('#text').on('input', translateText);
     });
 
     $('#translate_image_btn').on('click', function() {
         mode = 'image';
         $('#input_area').html(
+            '<label for="input_area" class="form-label">Inglés</label>' +
             '<input type="file" id="upload_image" name="file" class="form-control" accept="image/*">' +
             '<div id="image_preview" class="mt-3"></div>'
         );
-        $('#output_area').html('<textarea id="translated_image_preview" name="translated_image_preview" class="form-control" rows="6" readonly></textarea>');
+        $('#output_area').html(
+            '<label for="output_area" class="form-label">Francés</label>' + 
+            '<textarea id="translated_image_preview" name="translated_image_preview" class="form-control" rows="6" readonly></textarea>');
         $('#upload_image').on('change', uploadImage);
     });
 
     $('#translate_audio_btn').on('click', function() {
         mode = 'audio';
         $('#input_area').html(
+            '<label for="input_area" class="form-label">Inglés</label>' +
             '<input type="file" id="upload_audio" name="audio" class="form-control" accept="audio/*">' +
             '<div id="audio_preview" class="mt-3"></div>'
         );
-        $('#output_area').html('<textarea id="translated_audio_text" name="translated_audio_text" class="form-control" rows="6" readonly></textarea>');
+        $('#output_area').html(
+            '<label for="output_area" class="form-label">Francés</label>' + 
+            '<textarea id="translated_audio_text" name="translated_audio_text" class="form-control" rows="6" readonly></textarea>');
 
         $('#upload_audio').on('change', uploadAudio);
     });
