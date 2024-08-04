@@ -44,8 +44,11 @@
 
             $('#translate_image_btn').on('click', function() {
                 mode = 'image';
-                $('#input_area').html('<input type="file" id="upload_image" name="file" class="form-control" accept="image/*"><div id="image_preview" class="mt-3"></div>');
-                $('#output_area').html('<div id="translated_image_preview" class="mt-3"></div>');
+                $('#input_area').html(`
+                    <input type="file" id="upload_image" name="file" class="form-control" accept="image/*">
+                    <div id="image_preview" class="mt-3"></div>
+                `);
+                $('#output_area').html('<textarea id="translated_image_preview" name="translated_image_preview" class="form-control" rows="6" readonly></textarea>');
                 $('#upload_image').on('change', uploadImage);
             });
 
@@ -88,8 +91,8 @@
                     processData: false,
                     contentType: false,
                     success: function(data) {
-                        $('#image_preview').html('<img src="' + data.image_url + '" class="img-fluid" alt="Uploaded Image"><p>' + data.extracted_text + '</p>');
-                        $('#translated_image_preview').html('<img src="' + data.image_url + '" class="img-fluid" alt="Uploaded Image"><p>' + data.extracted_text + '</p>');
+                        $('#image_preview').html('<img src="' + data.image_url + '" class="img-fluid" alt="Uploaded Image">');
+                        $('#translated_image_preview').val(data.extracted_text);
                     }
                 });
             }

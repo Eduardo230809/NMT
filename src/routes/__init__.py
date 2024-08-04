@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, render_template
+from flask import Blueprint, request, jsonify, render_template, url_for
 from PIL import Image
 import pytesseract
 import os
@@ -10,7 +10,7 @@ from transformers import MarianTokenizer, MarianMTModel
 main_bp = Blueprint('main', __name__)
 
 # Ruta al modelo de traducción guardado.
-model_path = r'C:\Users\Eduardo\Documents\Transformer\src\models\saved_model'
+model_path = r'C:\NMT\src\models\saved_model'
 # Verifica si la ruta al modelo existe. Si no, lanza un error.
 if not os.path.isdir(model_path):
     raise ValueError(f"La ruta al modelo no existe: {model_path}")
@@ -51,12 +51,23 @@ def upload():
     file = request.files.get('file')
     if file:
         # Guarda el archivo en la carpeta 'static/uploads'.
-        file_path = os.path.join('static/uploads', file.filename)
+        uploads_dir = os.path.join('static', 'uploads')
+        os.makedirs(uploads_dir, exist_ok=True)
+        file_path = os.path.join(uploads_dir, file.filename)
         file.save(file_path)
         # Extrae el texto de la imagen utilizando pytesseract.
         extracted_text = pytesseract.image_to_string(Image.open(file_path))
+
+        # Traduce el texto extraído.
+        inputs = tokenizer.encode(extracted_text, return_tensors='pt').to(model.device)
+        translated = model.generate(inputs)
+        translated_text = tokenizer.decode(translated[0], skip_special_tokens=True)
+
         # Devuelve la URL de la imagen y el texto extraído en formato JSON.
-        return jsonify({'image_url': file_path, 'extracted_text': extracted_text})
+        return jsonify({
+            'image_url': url_for('static', filename=f'uploads/{file.filename}'),
+            'extracted_text': translated_text
+        })
     # Devuelve un mensaje de error si la carga del archivo falla.
     return jsonify({'error': 'File upload failed'})
 
