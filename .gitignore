@@ -6,6 +6,4 @@ __pycache__/
 
 .pytest_cache/
 
-NMT/static/uploads/*
-!NMT/static/uploads/
-!NMT/static/uploads/.gitignore
+static/uploads/*
