@@ -10,17 +10,26 @@
 <body>
     <div class="container mt-5">
         <h1 class="text-center">Traductor</h1>
+        <!-- Botones para seleccionar el tipo de traducción -->
         <div class="d-flex justify-content-start mt-4">
+            <!-- Botón para traducir texto -->
             <button id="translate_text_btn" class="btn btn-primary me-2">Traducir Texto</button>
+            <!-- Botón para traducir imagen -->
             <button id="translate_image_btn" class="btn btn-secondary me-2">Traducir Imagen</button>
+            <!-- Botón para traducir audio -->
             <button id="translate_audio_btn" class="btn btn-success">Traducir Audio</button>
         </div>
+        <!-- Áreas para la entrada y salida de la traducción -->
         <div class="row mt-4">
+            <!-- Área de entrada de datos -->
             <div class="col-md-6" id="input_area"></div>
+            <!-- Área de salida de datos -->
             <div class="col-md-6" id="output_area"></div>
         </div>
     </div>
+    <!-- Inclusión de la biblioteca jQuery desde un CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Inclusión de un archivo JavaScript personalizado -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

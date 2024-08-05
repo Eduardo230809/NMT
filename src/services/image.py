@@ -2,6 +2,7 @@ from PIL import Image
 import pytesseract
 import os
 
+#Función para procesar una imagen, guardarla en el servidor y extraer texto utilizando OCR.
 def process_image(file):
     file_path = os.path.join('static/uploads', file.filename)
     file.save(file_path)
